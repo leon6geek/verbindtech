@@ -55,7 +55,7 @@
       '<div class="product-img"><img loading="lazy" decoding="async"></div>' +
       '<div class="product-body"><span class="product-cat"></span><h3></h3><p></p></div>';
     var img = card.querySelector('img');
-    img.src = 'assets/img/products/' + p.id + '.webp';
+    img.src = p.img || 'assets/img/products/' + p.id + '.webp';
     img.alt = p.name;
     img.width = p.w; img.height = p.h;
     card.querySelector('.product-cat').textContent = labelOf[p.cat] || '';
@@ -90,7 +90,7 @@
     if (state.cat !== 'all') p.set('cat', state.cat);
     if (state.q.trim()) p.set('q', state.q.trim());
     var qs = p.toString();
-    history.replaceState(null, '', qs ? '?' + qs : window.location.pathname);
+    try { history.replaceState(null, '', qs ? '?' + qs : window.location.pathname); } catch (e) { /* sandboxed preview */ }
   }
 
   var t;
@@ -106,7 +106,7 @@
   function openProduct(p) {
     if (!dlg || typeof dlg.showModal !== 'function') return;
     var img = dlg.querySelector('[data-pd-img]');
-    img.src = 'assets/img/products/' + p.id + '.webp';
+    img.src = p.img || 'assets/img/products/' + p.id + '.webp';
     img.alt = p.name;
     dlg.querySelector('[data-pd-cat]').textContent = labelOf[p.cat] || '';
     dlg.querySelector('[data-pd-name]').textContent = p.name;

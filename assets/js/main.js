@@ -87,7 +87,7 @@
     var show = function (i) {
       index = (i + links.length) % links.length;
       var thumb = links[index].querySelector('img');
-      img.src = links[index].getAttribute('href');
+      img.src = thumb ? (thumb.currentSrc || thumb.src) : links[index].getAttribute('href');
       img.alt = thumb ? thumb.alt : '';
       cap.textContent = (thumb ? thumb.alt : '') + '  ·  ' + (index + 1) + ' / ' + links.length;
     };
