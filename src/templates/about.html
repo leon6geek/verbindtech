@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("About Verbindtech Machinery", "Tentang Verbindtech Machinery") }}{% endblock %}
+{% block description %}{{ _("Verbindtech Machinery: engineering partner to Indonesian manufacturers since 2008, based in Jababeka, Cikarang.", "Verbindtech Machinery: mitra rekayasa bagi produsen Indonesia sejak 2008, berbasis di Jababeka, Cikarang.") }}{% endblock %}
+
+{% block main %}
+{% call m.page_hero(_("Company", "Perusahaan"), _("Engineering partner to Indonesian industry since 2008.", "Mitra rekayasa bagi industri Indonesia sejak 2008."), _("What began as support for general items and special purpose machines has grown into a group that designs, fabricates, supplies and services machinery for some of Indonesia’s best-known manufacturers.", "Berawal dari dukungan untuk general item dan mesin khusus, kini berkembang menjadi grup yang merancang, memfabrikasi, memasok, dan melayani permesinan untuk produsen ternama di Indonesia."), 'team', [(_("Company", "Perusahaan"), '')]) %}{% endcall %}
+
+<section class="section">
+  <div class="container about-grid">
+    <div class="reveal">
+      <p class="eyebrow">{{ _("Who we are", "Siapa kami") }}</p>
+      <h2 class="h2">{{ _("Customised industrial solutions, tailored to how you operate.", "Solusi industri yang disesuaikan dengan cara Anda beroperasi.") }}</h2>
+      <p>{{ _("Verbindtech Machinery provides a comprehensive portfolio of customised industrial solutions for national clients, with a focus on West Java. We specialise in process technology — from spare-part making and stainless steel fabrication to special purpose machines — coupled with a first-class network of global technology partners.", "Verbindtech Machinery menyediakan portofolio solusi industri yang disesuaikan untuk klien nasional, dengan fokus di Jawa Barat. Kami berspesialisasi dalam teknologi proses — dari pembuatan spare part dan fabrikasi baja stainless hingga mesin khusus — didukung jaringan mitra teknologi global kelas satu.") }}</p>
+      <p>{{ _("Whether it is a new investment based on a feasibility study or an upgrade to get more performance from an existing facility, our engineering operations and technical services are tailored to your needs, your site and your operating conditions.", "Baik investasi baru berdasarkan studi kelayakan maupun upgrade untuk meningkatkan performa fasilitas yang ada, operasi rekayasa dan layanan teknis kami disesuaikan dengan kebutuhan, lokasi, dan kondisi operasional Anda.") }}</p>
+    </div>
+    <dl class="fact-card reveal">
+      <div><dt>{{ _("Group founded", "Grup didirikan") }}</dt><dd>2008</dd></div>
+      <div><dt>{{ _("Verbindtech Machinery", "Verbindtech Machinery") }}</dt><dd>2020</dd></div>
+      <div><dt>{{ _("Workshop & office", "Workshop & kantor") }}</dt><dd>Jababeka, Cikarang</dd></div>
+      <div><dt>{{ _("Service area", "Area layanan") }}</dt><dd>{{ _("All of Java", "Seluruh Jawa") }}</dd></div>
+      <div><dt>{{ _("Clients served", "Klien yang dilayani") }}</dt><dd>25+</dd></div>
+      <div><dt>{{ _("Technology partners", "Mitra teknologi") }}</dt><dd>6</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    {{ m.section_head(_("Vision", "Visi"), _("What we stand for.", "Nilai yang kami pegang.")) }}
+    <ul class="values">
+      {% for title, text in D.VALUES %}
+      <li class="reveal"><span class="value-no">{{ '%02d' % loop.index }}</span><h3>{{ t(title) }}</h3><p>{{ t(text) }}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="history">
+  <div class="container">
+    {{ m.section_head(_("History", "Sejarah"), _("Grown one workshop, one customer at a time.", "Tumbuh satu workshop, satu pelanggan pada satu waktu.")) }}
+    <ol class="timeline">
+      {% for year, title, text in D.TIMELINE %}
+      <li class="reveal{% if loop.last %} is-now{% endif %}"><time>{{ year }}</time><h3>{{ t(title) }}</h3><p>{{ t(text) }}</p></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="container">
+    {{ m.section_head(_("How we are organised", "Cara kami bekerja"), _("Four capabilities, one team.", "Empat kapabilitas, satu tim.")) }}
+    <ul class="org-grid">
+      <li class="reveal">{{ icon('cube', 'i org-ic') }}<h3>{{ _("Engineering & 3D design", "Rekayasa & desain 3D") }}</h3><p>{{ _("Mechanical and electrical engineers who turn requirements into models, drawings and control concepts.", "Engineer mekanis dan elektrikal yang mengubah kebutuhan menjadi model, gambar, dan konsep kontrol.") }}</p></li>
+      <li class="reveal">{{ icon('factory', 'i org-ic') }}<h3>{{ _("Fabrication workshop", "Workshop fabrikasi") }}</h3><p>{{ _("Our Jababeka plant for stainless and non-stainless fabrication, assembly and test runs.", "Pabrik Jababeka kami untuk fabrikasi stainless dan non-stainless, perakitan, dan uji coba.") }}</p></li>
+      <li class="reveal">{{ icon('globe', 'i org-ic') }}<h3>{{ _("Partner network", "Jaringan mitra") }}</h3><p>{{ _("Six technology and fabrication partners supplying proven standard machines and components.", "Enam mitra teknologi dan fabrikasi yang memasok mesin standar dan komponen teruji.") }}</p></li>
+      <li class="reveal">{{ icon('wrench', 'i org-ic') }}<h3>{{ _("Service team", "Tim layanan") }}</h3><p>{{ _("Service engineers, mechanics and welders for installation, maintenance and breakdowns.", "Service engineer, mekanik, dan welder untuk instalasi, perawatan, dan perbaikan kerusakan.") }}</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="partners">
+  <div class="container">
+    {{ m.section_head(_("Partners & clients", "Mitra & klien"), _("In good company.", "Dalam lingkungan yang baik.")) }}
+    <div class="partner-strip reveal">
+      <p class="eyebrow">{{ _("Technology partners", "Mitra teknologi") }}</p>
+      <ul>{% for name, role in D.PARTNERS %}<li><strong>{{ name }}</strong><span>{{ t(role) }}</span></li>{% endfor %}</ul>
+    </div>
+    <div class="client-wall reveal">
+      <p class="eyebrow">{{ _("Clients", "Klien") }}</p>
+      <ul>{% for c in D.CLIENTS %}<li>{{ c }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" id="events">
+  <div class="container event-card reveal">
+    <div class="event-date">
+      <span>ALLPACK</span>
+      <strong>2026</strong>
+      <em>Booth D104</em>
+    </div>
+    <div>
+      <p class="eyebrow">{{ _("Exhibitions", "Pameran") }}</p>
+      <h2 class="h2">{{ _("Meet us at ALLPACK Indonesia 2026.", "Temui kami di ALLPACK Indonesia 2026.") }}</h2>
+      <p class="section-sub">{{ _("On our stand: tray dryer, stick-bag packaging (VFFS), premade pouch packaging, small checkweigher, metal detector 910K, aluminium foil metal detector and checkweigher. Bring your product questions — our engineers will be there.", "Di booth kami: tray dryer, pengemasan stick bag (VFFS), pengemasan premade pouch, small checkweigher, metal detector 910K, aluminium foil metal detector, dan checkweigher. Bawa pertanyaan seputar produk Anda — engineer kami akan hadir.") }}</p>
+      <a class="btn btn-primary" href="{{ url('contact.html') }}?need=visit#quote">{{ _("Book a meeting at the booth", "Jadwalkan pertemuan di booth") }}{{ icon('arrow') }}</a>
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band(_("Visit our workshop in Jababeka.", "Kunjungi workshop kami di Jababeka."), _("See machines being built and tested, and meet the engineers who would work on your project.", "Lihat mesin yang sedang dibuat dan diuji, dan temui engineer yang akan menangani proyek Anda.")) }}
+{% endblock %}

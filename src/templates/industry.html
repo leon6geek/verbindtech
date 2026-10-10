@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ t(ind.name) }} — Verbindtech Machinery{% endblock %}
+{% block description %}{{ t(ind.intro) }}{% endblock %}
+
+{% block main %}
+{% call m.page_hero(_("Industries", "Industri") ~ " · " ~ t(ind.name), t(ind.headline), t(ind.intro), ind.img, [(_("Industries", "Industri"), ''), (t(ind.name), '')]) %}
+<div class="hero-actions">
+  <a class="btn btn-brand btn-lg" href="{{ url('contact.html#quote') }}">{{ _("Discuss your project", "Diskusikan proyek Anda") }}{{ icon('arrow') }}</a>
+  <a class="btn btn-ghost-light btn-lg" href="#cases">{{ _("See relevant projects", "Lihat proyek terkait") }}</a>
+</div>
+{% endcall %}
+
+<nav class="subnav" aria-label="{{ _('Other industries', 'Industri lainnya') }}">
+  <div class="container subnav-inner">
+    {% for i in D.INDUSTRIES %}
+    <a href="{{ url('industries/' + i.slug + '.html') }}"{% if i.slug == ind.slug %} aria-current="page"{% endif %}>{{ icon(i.icon) }}{{ t(i.short) }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+    {{ m.section_head(_("What we solve", "Yang kami selesaikan"), _("Common challenges — and how we address them.", "Tantangan umum — dan cara kami mengatasinya.")) }}
+    <ul class="challenge-grid">
+      {% for title, text in ind.challenges %}
+      <li class="challenge reveal">
+        <span class="challenge-no">{{ '%02d' % loop.index }}</span>
+        <h3>{{ t(title) }}</h3>
+        <p>{{ t(text) }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    {{ m.section_head(_("Solutions", "Solusi"), _("How we help", "Cara kami membantu"), _("Choose the scope that fits — from a single machine to a complete line with service.", "Pilih cakupan yang sesuai — dari satu mesin hingga satu lini lengkap beserta layanan.")) }}
+    <div class="sol-grid">
+      {% for key in ind.solutions %}
+      {% set s = D.SOLUTION[key] %}
+      <a class="sol-card reveal" href="{{ url('services.html') if key == 'services' else url('solutions.html#' + s.anchor) }}">
+        <span class="sol-media">{{ img(s.img, '') }}</span>
+        <span class="sol-body">
+          {{ icon(s.icon, 'i sol-ic') }}
+          <strong>{{ t(s.name) }}</strong>
+          <span>{{ t(s.teaser) }}</span>
+          <span class="link-arrow">{{ _("Learn more", "Selengkapnya") }}{{ icon('arrow') }}</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+    {% if ind.machines and ind.slug != 'automotive-industrial' %}
+    <div class="machine-links reveal">
+      <p class="eyebrow">{{ _("Relevant machines", "Mesin yang relevan") }}</p>
+      <ul>
+        {% for key, name, desc in D.CATEGORIES if key in ind.machines %}
+        <li><a href="{{ url('catalogue.html') }}?cat={{ key }}"><strong>{{ t(name) }}</strong><small>{{ products | selectattr('cat', 'equalto', key) | list | length }} {{ _("machines", "mesin") }}</small>{{ icon('arrow') }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section" id="cases">
+  <div class="container">
+    {{ m.section_head(_("Projects", "Proyek"), _("Selected work in this industry", "Pekerjaan pilihan di industri ini"), '', 'row', _("All projects", "Semua proyek"), url('projects.html')) }}
+    <div class="case-list">
+      {% for slug in ind.projects %}{{ m.project_card(D.PROJECT[slug]) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--navy section--tight">
+  <div class="container clients-band">
+    <div>
+      <p class="eyebrow eyebrow--light">{{ _("Clients", "Klien") }}</p>
+      <h2 class="h3">{{ _("Trusted by", "Dipercaya oleh") }}</h2>
+    </div>
+    <ul class="client-names">{% for c in ind.clients %}<li>{{ c }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+{{ m.cta_band(_("Planning a new line or machine?", "Merencanakan lini atau mesin baru?"), _("Share your product, target output and timeline. We will propose the right scope — machine, line or service.", "Bagikan produk, target output, dan jadwal Anda. Kami akan mengusulkan cakupan yang tepat — mesin, lini, atau layanan.")) }}
+{% endblock %}

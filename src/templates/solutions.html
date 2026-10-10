@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Solutions — turnkey lines, special purpose machines, equipment & fabrication", "Solusi — lini turnkey, mesin khusus, peralatan & fabrikasi") }} | Verbindtech{% endblock %}
+{% block description %}{{ _("Four ways to work with Verbindtech: turnkey process lines, special purpose machines, standard process and packaging equipment, and stainless fabrication.", "Empat cara bekerja dengan Verbindtech: lini proses turnkey, mesin khusus, peralatan proses dan pengemasan standar, serta fabrikasi stainless.") }}{% endblock %}
+
+{% block main %}
+{% call m.page_hero(_("Solutions", "Solusi"), _("Four ways to work with us — one team behind all of them.", "Empat cara bekerja dengan kami — satu tim di balik semuanya."), _("Buy a proven standard machine, commission a special machine for one job, or hand us a complete line. Fabrication and service are there whenever you need them.", "Beli mesin standar yang teruji, pesan mesin khusus untuk satu pekerjaan, atau serahkan satu lini lengkap kepada kami. Fabrikasi dan layanan siap kapan pun Anda butuhkan."), 'spm-render', [(_("Solutions", "Solusi"), '')]) %}{% endcall %}
+
+<nav class="subnav subnav--sticky" aria-label="{{ _('On this page', 'Di halaman ini') }}" data-scrollspy>
+  <div class="container subnav-inner">
+    {% for s in D.SOLUTIONS if s.key != 'services' %}
+    <a href="#{{ s.anchor }}">{{ icon(s.icon) }}{{ t(s.name) }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<!-- TURNKEY -->
+<section class="section sol-section" id="turnkey-lines">
+  <div class="container">
+    <div class="sol-intro">
+      <div class="reveal">
+        <p class="eyebrow">01 · {{ _("Turnkey process lines", "Lini proses turnkey") }}</p>
+        <h2 class="h2">{{ _("A complete line, from raw material to filled pack.", "Satu lini lengkap, dari bahan baku hingga kemasan terisi.") }}</h2>
+        <p class="section-sub">{{ _("We take responsibility for the whole process: we design the flow, select and build the equipment, install and pipe it, and commission it on your site. Design work is referenced to cGMP and laid out as a closed-loop system where your product needs protecting.", "Kami bertanggung jawab atas seluruh proses: merancang alur, memilih dan membuat peralatan, memasang dan menyambungkan perpipaan, serta melakukan commissioning di lokasi Anda. Desain mengacu pada cGMP dan dirancang sebagai sistem closed-loop ketika produk Anda perlu dilindungi.") }}</p>
+      </div>
+      <ul class="scope-list reveal">
+        <li>{{ icon('doc') }}<div><strong>{{ _("Process design", "Desain proses") }}</strong><span>{{ _("Requirement, flow and 3D layout", "Kebutuhan, alur, dan layout 3D") }}</span></div></li>
+        <li>{{ icon('factory') }}<div><strong>{{ _("Manufacture & supply", "Manufaktur & pengadaan") }}</strong><span>{{ _("Built in Cikarang or sourced from partners", "Dibuat di Cikarang atau dari mitra") }}</span></div></li>
+        <li>{{ icon('install') }}<div><strong>{{ _("Installation", "Instalasi") }}</strong><span>{{ _("Platforms, piping and utilities", "Platform, perpipaan, dan utilitas") }}</span></div></li>
+        <li>{{ icon('check') }}<div><strong>{{ _("Commissioning", "Commissioning") }}</strong><span>{{ _("Started up and proven with your product", "Dijalankan dan dibuktikan dengan produk Anda") }}</span></div></li>
+      </ul>
+    </div>
+
+    <figure class="flow-figure reveal">
+      <figcaption>{{ _("Example: tea powder line — process flow", "Contoh: lini teh bubuk — alur proses") }}</figcaption>
+      <ol class="flow">
+        {% for en, idn in [('Dumping station', 'Dumping station'), ('Vibro screen', 'Vibro screen'), ('Ribbon mixer', 'Ribbon mixer'), ('Vacuum conveying', 'Vacuum conveying'), ('Magnet trap', 'Magnet trap'), ('Metal detector', 'Metal detector'), ('IBC', 'IBC'), ('3-output auger', 'Auger 3 outlet'), ('Filling machines', 'Mesin filling')] %}
+        <li><span>{{ '%02d' % loop.index }}</span>{{ _(en, idn) }}</li>
+        {% endfor %}
+      </ol>
+    </figure>
+
+    <div class="photo-trio">
+      <figure class="reveal">{{ img('line-render', _("3D model of the tea powder line", "Model 3D lini teh bubuk")) }}<figcaption>{{ _("3D model", "Model 3D") }}</figcaption></figure>
+      <figure class="reveal">{{ img('line-cleanroom', _("Installed line in a clean production room", "Lini terpasang di ruang produksi bersih")) }}<figcaption>{{ _("Installed line", "Lini terpasang") }}</figcaption></figure>
+      <figure class="reveal">{{ img('liquid-plant-render', _("3D layout of a stainless liquid process area", "Layout 3D area proses cair stainless")) }}<figcaption>{{ _("Liquid process layout", "Layout proses cair") }}</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- SPM -->
+<section class="section section--tint sol-section" id="special-purpose-machines">
+  <div class="container">
+    <div class="sol-intro">
+      <div class="reveal">
+        <p class="eyebrow">02 · {{ _("Special purpose machines", "Mesin khusus (SPM)") }}</p>
+        <h2 class="h2">{{ _("When no catalogue machine fits, we design one that does.", "Ketika tidak ada mesin katalog yang cocok, kami merancang yang sesuai.") }}</h2>
+        <p class="section-sub">{{ _("Special purpose machines have been our core since 2008. We start from your part, product and cycle time, model the solution in 3D, agree the drawing with you, then build, test and install it.", "Mesin khusus telah menjadi inti kami sejak 2008. Kami memulai dari part, produk, dan cycle time Anda, memodelkan solusi dalam 3D, menyepakati gambar bersama Anda, lalu membuat, menguji, dan memasangnya.") }}</p>
+      </div>
+      <figure class="sol-figure reveal">{{ img('spm-render', _("3D design of an assembly machine with operator stations", "Desain 3D mesin perakitan dengan stasiun operator")) }}</figure>
+    </div>
+    <div class="spm-kinds">
+      <div class="reveal"><h3>{{ _("Automotive & industrial", "Otomotif & industri") }}</h3><p>{{ _("Inspection stations, assembly jigs, press auto-feeders, quick die change (Dandori) and energy-free material handling.", "Stasiun inspeksi, jig perakitan, press auto-feeder, quick die change (Dandori), dan material handling tanpa energi.") }}</p></div>
+      <div class="reveal"><h3>{{ _("Pharma & FMCG", "Farmasi & FMCG") }}</h3><p>{{ _("Ampoule feeders, case packers, bottle cleaners, hot filling and cooling, IBC blenders with full safety systems.", "Ampoule feeder, case packer, pembersih botol, hot filling dan pendinginan, IBC blender dengan sistem keselamatan lengkap.") }}</p></div>
+    </div>
+    <div class="tile-grid">
+      {% for slug in ['dandori', 'powerless-conveyor', 'case-packer', 'hot-filling', 'blow-suct', 'assembly-jigs'] %}{{ m.project_tile(D.PROJECT[slug]) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="section sol-section" id="equipment">
+  <div class="container">
+    <div class="sol-intro">
+      <div class="reveal">
+        <p class="eyebrow">03 · {{ _("Process & packaging equipment", "Peralatan proses & pengemasan") }}</p>
+        <h2 class="h2">{{ _("Proven standard machines, integrated by engineers.", "Mesin standar teruji, diintegrasikan oleh engineer.") }}</h2>
+        <p class="section-sub">{{ _("Our technology partners build standard machines in volume; we select the right model for your product, adapt it, integrate it with your line and support it locally. Customised orders are built and assembled in Indonesia.", "Mitra teknologi kami memproduksi mesin standar dalam jumlah besar; kami memilih model yang tepat untuk produk Anda, menyesuaikannya, mengintegrasikannya dengan lini Anda, dan mendukungnya secara lokal. Pesanan khusus dibuat dan dirakit di Indonesia.") }}</p>
+        <a class="btn btn-primary" href="{{ url('catalogue.html') }}">{{ _("Open the machine catalogue", "Buka katalog mesin") }}{{ icon('arrow') }}</a>
+      </div>
+      <figure class="sol-figure sol-figure--light reveal">{{ img('eq-bag-types', _("Ten bag styles available on our form-fill-seal machines", "Sepuluh jenis kemasan yang tersedia pada mesin form-fill-seal kami")) }}<figcaption>{{ _("Ten bag styles — pillow to stand-up pouch", "Sepuluh jenis kemasan — pillow hingga stand-up pouch") }}</figcaption></figure>
+    </div>
+    <ul class="cat-grid cat-grid--compact">
+      {% for key, name, desc in D.CATEGORIES %}
+      {% set first = products | selectattr('cat', 'equalto', key) | first %}
+      <li class="reveal">
+        <a class="cat-card" href="{{ url('catalogue.html') }}?cat={{ key }}">
+          <span class="cat-img"><img src="{{ asset('img/products/' + first.id + '.webp') }}" alt="" loading="lazy" decoding="async"></span>
+          <span class="cat-body"><strong>{{ t(name) }}</strong><small>{{ t(desc) }}</small><em>{{ products | selectattr('cat', 'equalto', key) | list | length }} {{ _("machines", "mesin") }}</em></span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="partner-strip reveal">
+      <p class="eyebrow">{{ _("Technology partners", "Mitra teknologi") }}</p>
+      <ul>{% for name, role in D.PARTNERS %}<li><strong>{{ name }}</strong><span>{{ t(role) }}</span></li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<!-- FABRICATION -->
+<section class="section section--tint sol-section" id="fabrication">
+  <div class="container">
+    <div class="sol-intro">
+      <div class="reveal">
+        <p class="eyebrow">04 · {{ _("Fabrication & precision parts", "Fabrikasi & part presisi") }}</p>
+        <h2 class="h2">{{ _("Our own workshop in Jababeka, Cikarang.", "Workshop kami sendiri di Jababeka, Cikarang.") }}</h2>
+        <p class="section-sub">{{ _("Stainless and non-stainless steel fabrication, GMP tanks and process skids, jigs, frames, guarding and spare parts — made in our plant and checked before they leave.", "Fabrikasi baja stainless dan non-stainless, tangki GMP dan skid proses, jig, rangka, pengaman, dan spare part — dibuat di pabrik kami dan diperiksa sebelum dikirim.") }}</p>
+        <ul class="ticks">
+          <li>{{ icon('check') }}{{ _("Stainless tanks, piping and platforms for pharma and food", "Tangki stainless, perpipaan, dan platform untuk farmasi dan pangan") }}</li>
+          <li>{{ icon('check') }}{{ _("Machine guarding and enclosures", "Pengaman dan enclosure mesin") }}</li>
+          <li>{{ icon('check') }}{{ _("Precision parts, jigs and fixtures", "Part presisi, jig, dan fixture") }}</li>
+          <li>{{ icon('check') }}{{ _("Replacement parts when originals are slow or unavailable", "Part pengganti saat part asli lama atau tidak tersedia") }}</li>
+        </ul>
+      </div>
+      <div class="photo-pair reveal">
+        <figure>{{ img('tank-delivery', _("Stainless tank prepared for delivery", "Tangki stainless disiapkan untuk pengiriman")) }}</figure>
+        <figure>{{ img('enclosure', _("Stainless machine enclosure on a conveyor line", "Enclosure mesin stainless pada lini konveyor")) }}</figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band(_("Not sure which route fits?", "Belum yakin rute mana yang sesuai?"), _("Tell us about the product and the result you need. We will recommend standard, custom or a combination — and explain why.", "Ceritakan produk dan hasil yang Anda butuhkan. Kami akan merekomendasikan mesin standar, khusus, atau kombinasinya — beserta alasannya.")) }}
+{% endblock %}

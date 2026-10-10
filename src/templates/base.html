@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <meta name="theme-color" content="#0b1c2c">
+  <link rel="icon" type="image/png" href="{{ asset('img/logo-mark.png') }}">
+  {% set site = 'https://verbind-tech.net/' %}
+  <link rel="canonical" href="{{ site ~ ('' if lang == 'en' else 'id/') ~ path }}">
+  <link rel="alternate" hreflang="en" href="{{ site ~ path }}">
+  <link rel="alternate" hreflang="id" href="{{ site ~ 'id/' ~ path }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:image" content="https://verbind-tech.net/assets/img/line-cleanroom.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="page-{{ nav }}">
+  <a class="skip" href="#main">{{ _("Skip to content", "Langsung ke konten") }}</a>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a class="topbar-event" href="{{ url('about.html#events') }}">
+        <span class="pulse" aria-hidden="true"></span>{{ t(D.EVENT) }}
+      </a>
+      <div class="topbar-links">
+        <a href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span><span class="hide-sm">{{ _("Service & spare parts", "Layanan & spare part") }}: </span>{{ D.COMPANY.wa_display }}</span></a>
+        <a href="tel:{{ D.COMPANY.phone }}" class="hide-sm">{{ icon('phone') }}<span>{{ D.COMPANY.phone_display }}</span></a>
+        <div class="lang" role="group" aria-label="{{ _('Language', 'Bahasa') }}">
+          {{ icon('globe') }}
+          {% if lang == 'en' %}<span aria-current="true">EN</span><a href="{{ alt_href }}" hreflang="id" lang="id">ID</a>
+          {% else %}<a href="{{ alt_href }}" hreflang="en" lang="en">EN</a><span aria-current="true">ID</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="{{ url('index.html') }}" aria-label="Verbindtech Machinery — {{ _('home', 'beranda') }}">
+        <img src="{{ asset('img/logo-mark.png') }}" alt="" width="38" height="35">
+        <span class="brand-word">Verbindtech<small>Machinery</small></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="{{ _('Main', 'Utama') }}" data-nav>
+        <ul class="nav-list">
+          <li class="nav-item has-mega">
+            <button class="nav-link{% if nav == 'industries' %} is-active{% endif %}" type="button" aria-expanded="false" aria-controls="mega-industries" data-mega-toggle>{{ _("Industries", "Industri") }}{{ icon('chevron', 'i chev') }}</button>
+            <div class="mega" id="mega-industries" data-mega>
+              <div class="container mega-inner">
+                <div class="mega-intro">
+                  <p class="eyebrow">{{ _("Industries", "Industri") }}</p>
+                  <p class="mega-title">{{ _("Engineering shaped by the rules of your sector.", "Rekayasa yang mengikuti aturan sektor Anda.") }}</p>
+                  <a class="link-arrow" href="{{ url('projects.html') }}">{{ _("See all projects", "Lihat semua proyek") }}{{ icon('arrow') }}</a>
+                </div>
+                <ul class="mega-links">
+                  {% for i in D.INDUSTRIES %}
+                  <li><a href="{{ url('industries/' + i.slug + '.html') }}">{{ icon(i.icon, 'i mega-ic') }}<span><strong>{{ t(i.name) }}</strong><small>{{ t(i.teaser) }}</small></span></a></li>
+                  {% endfor %}
+                </ul>
+                <a class="mega-card" href="{{ url('projects.html#tea-powder-line') }}">
+                  {{ img('line-cleanroom', '', 'mega-card-img') }}
+                  <span class="mega-card-body"><small>{{ _("Featured project", "Proyek unggulan") }}</small><strong>{{ _("Turnkey tea powder line, designed to cGMP", "Lini teh bubuk turnkey, dirancang sesuai cGMP") }}</strong></span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item has-mega">
+            <button class="nav-link{% if nav == 'solutions' %} is-active{% endif %}" type="button" aria-expanded="false" aria-controls="mega-solutions" data-mega-toggle>{{ _("Solutions", "Solusi") }}{{ icon('chevron', 'i chev') }}</button>
+            <div class="mega" id="mega-solutions" data-mega>
+              <div class="container mega-inner">
+                <div class="mega-intro">
+                  <p class="eyebrow">{{ _("Solutions", "Solusi") }}</p>
+                  <p class="mega-title">{{ _("From one machine to a complete line.", "Dari satu mesin hingga satu lini lengkap.") }}</p>
+                  <a class="link-arrow" href="{{ url('solutions.html') }}">{{ _("Solutions overview", "Ikhtisar solusi") }}{{ icon('arrow') }}</a>
+                </div>
+                <ul class="mega-links">
+                  {% for s in D.SOLUTIONS if s.key != 'services' %}
+                  <li><a href="{{ url('solutions.html#' + s.anchor) }}">{{ icon(s.icon, 'i mega-ic') }}<span><strong>{{ t(s.name) }}</strong><small>{{ t(s.teaser) }}</small></span></a></li>
+                  {% endfor %}
+                </ul>
+                <div class="mega-cats">
+                  <p class="eyebrow">{{ _("Machine catalogue", "Katalog mesin") }}</p>
+                  <ul>
+                    {% for key, name, desc in D.CATEGORIES %}
+                    <li><a href="{{ url('catalogue.html') }}?cat={{ key }}">{{ t(name) }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <a class="link-arrow" href="{{ url('catalogue.html') }}">{{ _("All 81 machines", "Semua 81 mesin") }}{{ icon('arrow') }}</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item has-mega">
+            <button class="nav-link{% if nav == 'services' %} is-active{% endif %}" type="button" aria-expanded="false" aria-controls="mega-services" data-mega-toggle>{{ _("Services", "Layanan") }}{{ icon('chevron', 'i chev') }}</button>
+            <div class="mega" id="mega-services" data-mega>
+              <div class="container mega-inner">
+                <div class="mega-intro">
+                  <p class="eyebrow">{{ _("Services", "Layanan") }}</p>
+                  <p class="mega-title">{{ _("Support for the whole life of your machines.", "Dukungan sepanjang umur mesin Anda.") }}</p>
+                  <a class="link-arrow" href="{{ url('services.html') }}">{{ _("All services", "Semua layanan") }}{{ icon('arrow') }}</a>
+                </div>
+                <ul class="mega-links">
+                  {% for s in D.SERVICES %}
+                  <li><a href="{{ url('services.html#' + s.anchor) }}">{{ icon(s.icon, 'i mega-ic') }}<span><strong>{{ t(s.name) }}</strong><small>{{ t(s.desc) }}</small></span></a></li>
+                  {% endfor %}
+                </ul>
+                <div class="mega-help">
+                  {{ icon('bolt', 'i mega-help-ic') }}
+                  <strong>{{ _("Machine down?", "Mesin berhenti?") }}</strong>
+                  <p>{{ _("Message our service team on WhatsApp with a photo or video of the problem.", "Kirim pesan ke tim layanan kami via WhatsApp beserta foto atau video masalahnya.") }}</p>
+                  <a class="btn btn-sm btn-wa" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link{% if nav == 'projects' %} is-active{% endif %}" href="{{ url('projects.html') }}">{{ _("Projects", "Proyek") }}</a></li>
+          <li class="nav-item"><a class="nav-link{% if nav == 'company' %} is-active{% endif %}" href="{{ url('about.html') }}">{{ _("Company", "Perusahaan") }}</a></li>
+          <li class="nav-item"><a class="nav-link{% if nav == 'contact' %} is-active{% endif %}" href="{{ url('contact.html') }}">{{ _("Contact", "Kontak") }}</a></li>
+        </ul>
+        <div class="nav-mobile-foot">
+          <a class="btn btn-brand btn-block" href="{{ url('contact.html#quote') }}">{{ _("Request a quote", "Minta penawaran") }}</a>
+          <div class="lang lang-lg">
+            {% if lang == 'en' %}<span aria-current="true">English</span><a href="{{ alt_href }}" hreflang="id" lang="id">Bahasa Indonesia</a>
+            {% else %}<a href="{{ alt_href }}" hreflang="en" lang="en">English</a><span aria-current="true">Bahasa Indonesia</span>{% endif %}
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-brand hide-md" href="{{ url('contact.html#quote') }}">{{ _("Request a quote", "Minta penawaran") }}</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-nav-toggle>
+          <span class="sr-only">{{ _("Menu", "Menu") }}</span>{{ icon('menu', 'i i-open') }}{{ icon('close', 'i i-close') }}
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand brand--light" href="{{ url('index.html') }}">
+            <img src="{{ asset('img/logo-mark.png') }}" alt="" width="38" height="35">
+            <span class="brand-word">Verbindtech<small>Machinery</small></span>
+          </a>
+          <p class="footer-claim">{{ _("You’re in good hands with Verbindtech.", "Anda berada di tangan yang tepat bersama Verbindtech.") }}</p>
+          <ul class="footer-contact">
+            <li>{{ icon('pin') }}<span>{{ D.COMPANY.address }}</span></li>
+            <li>{{ icon('phone') }}<a href="tel:{{ D.COMPANY.phone }}">{{ D.COMPANY.phone_display }}</a></li>
+            <li>{{ icon('whatsapp') }}<a href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ D.COMPANY.wa_display }}</a></li>
+            <li>{{ icon('mail') }}<a href="mailto:{{ D.COMPANY.email }}">{{ D.COMPANY.email }}</a></li>
+          </ul>
+        </div>
+        <nav class="footer-col" aria-label="{{ _('Industries', 'Industri') }}">
+          <h2>{{ _("Industries", "Industri") }}</h2>
+          {% for i in D.INDUSTRIES %}<a href="{{ url('industries/' + i.slug + '.html') }}">{{ t(i.name) }}</a>{% endfor %}
+        </nav>
+        <nav class="footer-col" aria-label="{{ _('Solutions', 'Solusi') }}">
+          <h2>{{ _("Solutions", "Solusi") }}</h2>
+          {% for s in D.SOLUTIONS if s.key != 'services' %}<a href="{{ url('solutions.html#' + s.anchor) }}">{{ t(s.name) }}</a>{% endfor %}
+          <a href="{{ url('catalogue.html') }}">{{ _("Machine catalogue", "Katalog mesin") }}</a>
+        </nav>
+        <nav class="footer-col" aria-label="{{ _('Services', 'Layanan') }}">
+          <h2>{{ _("Services", "Layanan") }}</h2>
+          {% for s in D.SERVICES %}<a href="{{ url('services.html#' + s.anchor) }}">{{ t(s.name) }}</a>{% endfor %}
+        </nav>
+        <nav class="footer-col" aria-label="{{ _('Company', 'Perusahaan') }}">
+          <h2>{{ _("Company", "Perusahaan") }}</h2>
+          <a href="{{ url('about.html') }}">{{ _("About us", "Tentang kami") }}</a>
+          <a href="{{ url('about.html#history') }}">{{ _("History", "Sejarah") }}</a>
+          <a href="{{ url('projects.html') }}">{{ _("Projects", "Proyek") }}</a>
+          <a href="{{ url('about.html#partners') }}">{{ _("Partners", "Mitra") }}</a>
+          <a href="{{ url('contact.html') }}">{{ _("Contact", "Kontak") }}</a>
+          <div class="social">
+            <a href="{{ D.COMPANY.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{{ icon('instagram') }}</a>
+            <a href="{{ D.COMPANY.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icon('linkedin') }}</a>
+            <a href="{{ D.COMPANY.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{{ icon('facebook') }}</a>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Verbindtech Machinery. {{ _("All rights reserved.", "Hak cipta dilindungi.") }}</span>
+        <div class="lang">
+          {% if lang == 'en' %}<span aria-current="true">English</span><a href="{{ alt_href }}" hreflang="id" lang="id">Bahasa Indonesia</a>
+          {% else %}<a href="{{ alt_href }}" hreflang="en" lang="en">English</a><span aria-current="true">Bahasa Indonesia</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="action-bar" aria-label="{{ _('Quick contact', 'Kontak cepat') }}">
+    <a href="tel:{{ D.COMPANY.phone }}">{{ icon('phone') }}<span>{{ _("Call", "Telepon") }}</span></a>
+    <a href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>WhatsApp</span></a>
+    <a class="is-primary" href="{{ url('contact.html#quote') }}">{{ icon('doc') }}<span>{{ _("Get a quote", "Penawaran") }}</span></a>
+  </div>
+
+  <script>window.VT = {{ {'lang': lang, 'wa': D.COMPANY.wa, 'email': D.COMPANY.email} | tojson }};</script>
+  <script src="{{ asset('js/site.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Contact & request a quote", "Kontak & minta penawaran") }} | Verbindtech{% endblock %}
+{% block description %}{{ _("Request a quotation, report a breakdown or visit our workshop in Jababeka, Cikarang.", "Minta penawaran, laporkan kerusakan, atau kunjungi workshop kami di Jababeka, Cikarang.") }}{% endblock %}
+
+{% block main %}
+<section class="contact-hero">
+  <div class="container">
+    <nav class="crumbs crumbs--dark" aria-label="{{ _('Breadcrumb', 'Navigasi') }}"><a href="{{ url('index.html') }}">{{ _("Home", "Beranda") }}</a><span aria-hidden="true">/</span><span aria-current="page">{{ _("Contact", "Kontak") }}</span></nav>
+    <h1 class="display display--sm">{{ _("How can we help?", "Apa yang bisa kami bantu?") }}</h1>
+    <div class="paths">
+      <a class="path-card" href="#quote">{{ icon('doc', 'i path-ic') }}<strong>{{ _("Request a quote", "Minta penawaran") }}</strong><span>{{ _("New line, special machine or standard machine. Three short steps.", "Lini baru, mesin khusus, atau mesin standar. Tiga langkah singkat.") }}</span></a>
+      <a class="path-card path-card--urgent" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp', 'i path-ic') }}<strong>{{ _("Service & breakdowns", "Layanan & kerusakan") }}</strong><span>{{ _("WhatsApp our service team with a photo or video.", "WhatsApp tim layanan kami dengan foto atau video.") }}</span><em>{{ D.COMPANY.wa_display }}</em></a>
+      <a class="path-card" href="#visit">{{ icon('factory', 'i path-ic') }}<strong>{{ _("Visit the workshop", "Kunjungi workshop") }}</strong><span>{{ _("See machines being built and tested in Jababeka, Cikarang.", "Lihat mesin dibuat dan diuji di Jababeka, Cikarang.") }}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quote">
+  <div class="container rfq-layout">
+    <form class="rfq" data-rfq novalidate>
+      <div class="rfq-head">
+        <h2 class="h3">{{ _("Request a quote", "Minta penawaran") }}</h2>
+        <ol class="rfq-progress" aria-hidden="true">
+          <li class="is-active"><span>1</span>{{ _("Need", "Kebutuhan") }}</li>
+          <li><span>2</span>{{ _("Product", "Produk") }}</li>
+          <li><span>3</span>{{ _("Contact", "Kontak") }}</li>
+        </ol>
+      </div>
+
+      <fieldset class="rfq-step is-active" data-step="1">
+        <legend>{{ _("What do you need?", "Apa yang Anda butuhkan?") }}</legend>
+        <div class="choice-grid">
+          {% for val, ic, en, idn, sen, sid in [
+            ('line', 'line', 'New production line', 'Lini produksi baru', 'Turnkey design & build', 'Desain & pembuatan turnkey'),
+            ('spm', 'robot', 'Special purpose machine', 'Mesin khusus', 'Automate a specific task', 'Otomasi tugas tertentu'),
+            ('machine', 'box', 'Standard machine', 'Mesin standar', 'From our catalogue', 'Dari katalog kami'),
+            ('retrofit', 'refresh', 'Retrofit or upgrade', 'Retrofit atau upgrade', 'Improve an existing machine', 'Tingkatkan mesin yang ada'),
+            ('service', 'calendar', 'Maintenance', 'Perawatan', 'Preventive or corrective', 'Preventif atau korektif'),
+            ('parts', 'parts', 'Spare parts', 'Spare part', 'Original or fabricated', 'Asli atau fabrikasi'),
+            ('fabrication', 'weld', 'Fabrication', 'Fabrikasi', 'Tanks, frames, jigs', 'Tangki, rangka, jig'),
+            ('visit', 'users', 'Visit or meeting', 'Kunjungan atau pertemuan', 'Workshop or exhibition', 'Workshop atau pameran'),
+          ] %}
+          <label class="choice">
+            <input type="radio" name="need" value="{{ val }}" data-label="{{ _(en, idn) }}"{% if loop.first %} required{% endif %}>
+            <span>{{ icon(ic, 'i choice-ic') }}<strong>{{ _(en, idn) }}</strong><small>{{ _(sen, sid) }}</small></span>
+          </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset class="rfq-step" data-step="2" hidden>
+        <legend>{{ _("Tell us about your product", "Ceritakan tentang produk Anda") }}</legend>
+        <div class="field-row">
+          <label class="field"><span>{{ _("Industry", "Industri") }}</span>
+            <select name="industry">
+              {% for i in D.INDUSTRIES %}<option>{{ t(i.name) }}</option>{% endfor %}
+              <option>{{ _("Other", "Lainnya") }}</option>
+            </select>
+          </label>
+          <label class="field"><span>{{ _("Timeline", "Jadwal") }}</span>
+            <select name="timeline">
+              <option>{{ _("As soon as possible", "Secepatnya") }}</option>
+              <option>{{ _("Within 3 months", "Dalam 3 bulan") }}</option>
+              <option>{{ _("3–6 months", "3–6 bulan") }}</option>
+              <option>{{ _("6+ months", "Lebih dari 6 bulan") }}</option>
+              <option>{{ _("Budgeting / feasibility", "Penganggaran / studi kelayakan") }}</option>
+            </select>
+          </label>
+        </div>
+        <div class="field">
+          <span>{{ _("Product form", "Bentuk produk") }}</span>
+          <div class="pill-group">
+            {% for en, idn in [('Powder', 'Serbuk'), ('Granule', 'Granul'), ('Liquid', 'Cair'), ('Cream / paste', 'Krim / pasta'), ('Tablet / capsule', 'Tablet / kapsul'), ('Solid parts', 'Part padat'), ('Other', 'Lainnya')] %}
+            <label class="pill"><input type="checkbox" name="form" value="{{ _(en, idn) }}"><span>{{ _(en, idn) }}</span></label>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>{{ _("Target output", "Target output") }}</span><input name="output" placeholder="{{ _('e.g. 60 packs/min or 500 kg/h', 'mis. 60 pak/menit atau 500 kg/jam') }}"></label>
+          <label class="field"><span>{{ _("Pack or container", "Kemasan atau wadah") }}</span><input name="pack" placeholder="{{ _('e.g. 250 g stick bag, 100 ml bottle', 'mis. stick bag 250 g, botol 100 ml') }}"></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rfq-step" data-step="3" hidden>
+        <legend>{{ _("How can we reach you?", "Bagaimana kami dapat menghubungi Anda?") }}</legend>
+        <div class="field-row">
+          <label class="field"><span>{{ _("Name", "Nama") }} *</span><input name="name" autocomplete="name" required></label>
+          <label class="field"><span>{{ _("Company", "Perusahaan") }} *</span><input name="company" autocomplete="organization" required></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>{{ _("Email", "Email") }} *</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="field"><span>{{ _("Phone / WhatsApp", "Telepon / WhatsApp") }} *</span><input name="phone" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label class="field"><span>{{ _("Your role", "Peran Anda") }}</span>
+          <select name="role">
+            {% for en, idn in [('Plant or engineering manager', 'Manajer pabrik atau engineering'), ('Process or project engineer', 'Engineer proses atau proyek'), ('Procurement', 'Pengadaan (procurement)'), ('Maintenance', 'Maintenance'), ('Owner or director', 'Pemilik atau direktur'), ('Other', 'Lainnya')] %}<option>{{ _(en, idn) }}</option>{% endfor %}
+          </select>
+        </label>
+        <label class="field"><span>{{ _("Anything else we should know?", "Ada hal lain yang perlu kami ketahui?") }}</span><textarea name="message" rows="4" placeholder="{{ _('Current process, space available, standards to meet…', 'Proses saat ini, ruang tersedia, standar yang harus dipenuhi…') }}"></textarea></label>
+        <label class="check"><input type="checkbox" name="urs"><span>{{ _("We have a URS, drawing or photos to share — we will send them by email.", "Kami memiliki URS, gambar, atau foto — akan kami kirim melalui email.") }}</span></label>
+      </fieldset>
+
+      <p class="form-error" role="alert" hidden data-error></p>
+      <div class="rfq-nav">
+        <button class="btn btn-outline" type="button" data-prev hidden>{{ _("Back", "Kembali") }}</button>
+        <button class="btn btn-primary" type="button" data-next>{{ _("Continue", "Lanjut") }}{{ icon('arrow') }}</button>
+        <div class="rfq-submit" data-submit hidden>
+          <button class="btn btn-brand" type="submit" data-channel="wa">{{ icon('whatsapp') }}{{ _("Send via WhatsApp", "Kirim via WhatsApp") }}</button>
+          <button class="btn btn-outline" type="submit" data-channel="mail">{{ icon('mail') }}{{ _("Send by email", "Kirim via email") }}</button>
+        </div>
+      </div>
+      <p class="rfq-note">{{ _("Your enquiry opens in WhatsApp or your email app, ready to send. We reply on working days.", "Permintaan Anda akan terbuka di WhatsApp atau aplikasi email, siap dikirim. Kami membalas pada hari kerja.") }}</p>
+    </form>
+
+    <aside class="contact-side" id="visit">
+      <div class="side-card">
+        <h2 class="h4">{{ _("Talk to us directly", "Hubungi kami langsung") }}</h2>
+        <ul class="side-list">
+          <li>{{ icon('whatsapp') }}<div><small>WhatsApp</small><a href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ D.COMPANY.wa_display }}</a></div></li>
+          <li>{{ icon('phone') }}<div><small>{{ _("Office", "Kantor") }}</small><a href="tel:{{ D.COMPANY.phone }}">{{ D.COMPANY.phone_display }}</a></div></li>
+          <li>{{ icon('mail') }}<div><small>Email</small><a href="mailto:{{ D.COMPANY.email }}">{{ D.COMPANY.email }}</a></div></li>
+          <li>{{ icon('pin') }}<div><small>{{ _("Workshop & office", "Workshop & kantor") }}</small><address>{{ D.COMPANY.address }}</address></div></li>
+        </ul>
+      </div>
+      <div class="map">
+        <a class="map-open" href="{{ D.COMPANY.maps }}" target="_blank" rel="noopener">{{ _("Open in Google Maps", "Buka di Google Maps") }}{{ icon('arrow-up-right') }}</a>
+        <iframe title="{{ _('Verbindtech Machinery on Google Maps', 'Verbindtech Machinery di Google Maps') }}" src="{{ D.COMPANY.maps_embed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container faq-wrap">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h2">{{ _("Questions buyers ask us.", "Pertanyaan yang sering diajukan pembeli.") }}</h2>
+      <p class="section-sub">{{ _("Straight answers for engineering, procurement and management.", "Jawaban langsung untuk tim engineering, procurement, dan manajemen.") }}</p>
+    </div>
+    <div class="faq">
+      {% for q, a in D.FAQ %}
+      <details{% if loop.first %} open{% endif %}>
+        <summary>{{ t(q) }}{{ icon('plus', 'i check-ic') }}</summary>
+        <p>{{ t(a) }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

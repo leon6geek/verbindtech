@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Projects & case studies", "Proyek & studi kasus") }} | Verbindtech{% endblock %}
+{% block description %}{{ _("Turnkey lines, special purpose machines and retrofits delivered by Verbindtech for pharmaceutical, food, FMCG and automotive manufacturers.", "Lini turnkey, mesin khusus, dan retrofit yang dikerjakan Verbindtech untuk produsen farmasi, pangan, FMCG, dan otomotif.") }}{% endblock %}
+
+{% block main %}
+{% call m.page_hero(_("Projects", "Proyek"), _("Lines and machines at work in Indonesian factories.", "Lini dan mesin yang bekerja di pabrik-pabrik Indonesia."), _("Each case shows the challenge we were given, what we built and what it changed. Filter by your industry.", "Setiap kasus menunjukkan tantangan yang kami terima, apa yang kami bangun, dan perubahan yang dihasilkan. Filter berdasarkan industri Anda."), 'line-render', [(_("Projects", "Proyek"), '')]) %}{% endcall %}
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="{{ _('Filter by industry', 'Filter berdasarkan industri') }}" data-filter-group="cases">
+      <button type="button" aria-pressed="true" data-filter="all">{{ _("All projects", "Semua proyek") }} <small>{{ D.PROJECTS | length }}</small></button>
+      {% for i in D.INDUSTRIES %}
+      <button type="button" aria-pressed="false" data-filter="{{ i.slug }}">{{ t(i.short) }} <small>{{ D.PROJECTS | selectattr('industries', 'contains', i.slug) | list | length }}</small></button>
+      {% endfor %}
+    </div>
+    <div class="case-list" data-filter-target="cases">
+      {% for p in D.PROJECTS %}{{ m.project_card(p) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" id="gallery">
+  <div class="container">
+    {{ m.section_head(_("Gallery", "Galeri"), _("From the workshop floor.", "Dari lantai workshop."), _("Builds, test runs and installations. Tap a photo to enlarge.", "Proses pembuatan, uji coba, dan instalasi. Ketuk foto untuk memperbesar."), 'row') }}
+    <div class="gallery" data-gallery>
+      {% for name, en, idn, tall in [
+        ('shop-17-97', 'Stainless spiral elevator in the workshop', 'Spiral elevator stainless di workshop', true),
+        ('shop-18-67', 'Jacketed stainless tanks with agitators', 'Tangki stainless berjaket dengan agitator', false),
+        ('shop-5-18', 'Rotary vibrating sifter before delivery', 'Ayakan getar putar sebelum pengiriman', false),
+        ('shop-20-30', 'Stainless machine enclosure', 'Enclosure mesin stainless', true),
+        ('shop-12-31', 'Vacuum conveyor receivers', 'Receiver vacuum conveyor', false),
+        ('shop-4-89', 'Control panel wiring with inverters', 'Pengkabelan panel kontrol dengan inverter', false),
+        ('shop-11-84', 'Vertical packing machine on test', 'Mesin pengemas vertikal saat uji coba', true),
+        ('shop-6-71', 'Labeling station on a bottle conveyor', 'Stasiun labeling pada konveyor botol', false),
+        ('shop-9-66', 'Row of vertical packing machines', 'Deretan mesin pengemas vertikal', true),
+        ('tank-delivery', 'Stainless tank on delivery', 'Tangki stainless saat pengiriman', false),
+        ('shop-3-89', 'Servo drive on a machine frame', 'Servo drive pada rangka mesin', false),
+        ('shop-7-75', 'Sealing jaws inside a packing machine', 'Sealing jaw di dalam mesin pengemas', false),
+      ] %}
+      <a href="{{ asset('img/' + name + '.webp') }}"{% if tall %} class="g-tall"{% endif %}>{{ img(name, _(en, idn)) }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band(_("Have a similar challenge?", "Punya tantangan serupa?"), _("Send us a short description, photos or a URS. We will tell you honestly whether and how we can help.", "Kirimkan deskripsi singkat, foto, atau URS. Kami akan menjawab dengan jujur apakah dan bagaimana kami dapat membantu.")) }}
+
+<dialog class="lightbox" data-lightbox aria-label="{{ _('Photo viewer', 'Penampil foto') }}">
+  <button class="lb-btn lb-close" type="button" data-lb-close aria-label="{{ _('Close', 'Tutup') }}">{{ icon('close') }}</button>
+  <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="{{ _('Previous', 'Sebelumnya') }}">{{ icon('arrow') }}</button>
+  <figure><img alt="" data-lb-img><figcaption data-lb-cap></figcaption></figure>
+  <button class="lb-btn lb-next" type="button" data-lb-next aria-label="{{ _('Next', 'Berikutnya') }}">{{ icon('arrow') }}</button>
+</dialog>
+{% endblock %}

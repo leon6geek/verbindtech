@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Verbindtech Machinery — Process, packaging & special purpose machines in Indonesia", "Verbindtech Machinery — Mesin proses, pengemasan & mesin khusus di Indonesia") }}{% endblock %}
+{% block description %}{{ _("Turnkey process lines, special purpose machines, packaging and inspection equipment — engineered, built and serviced from Cikarang for pharmaceutical, food, FMCG, chemical and automotive manufacturers across Java.", "Lini proses turnkey, mesin khusus, peralatan pengemasan dan inspeksi — dirancang, dibuat, dan dilayani dari Cikarang untuk produsen farmasi, pangan, FMCG, kimia, dan otomotif di seluruh Jawa.") }}{% endblock %}
+
+{% block main %}
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media" aria-hidden="true">{{ img('line-cleanroom', '', '', 'eager') }}</div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow eyebrow--light">{{ _("Machinery & automation partner · Since 2008", "Mitra permesinan & otomasi · Sejak 2008") }}</p>
+      <h1 class="display">{{ _("Global machine technology.<br><span>Local engineering and service.</span>", "Teknologi mesin global.<br><span>Rekayasa dan layanan lokal.</span>") }}</h1>
+      <p class="lead">{{ _("We design, build, install and maintain process, packaging and special purpose machines for pharmaceutical, food, FMCG, chemical and automotive manufacturers — one accountable partner from first sketch to after-sales.", "Kami merancang, membuat, memasang, dan merawat mesin proses, pengemasan, dan mesin khusus untuk produsen farmasi, pangan, FMCG, kimia, dan otomotif — satu mitra yang bertanggung jawab dari sketsa pertama hingga purna jual.") }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-brand btn-lg" href="{{ url('contact.html#quote') }}">{{ _("Talk to an engineer", "Bicara dengan engineer") }}{{ icon('arrow') }}</a>
+        <a class="btn btn-ghost-light btn-lg" href="{{ url('projects.html') }}">{{ _("See our projects", "Lihat proyek kami") }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="intent">
+      <p class="intent-label">{{ _("What do you need?", "Apa yang Anda butuhkan?") }}</p>
+      <a class="intent-card" href="{{ url('solutions.html#turnkey-lines') }}">
+        {{ icon('line', 'i intent-ic') }}
+        <strong>{{ _("A new production line", "Lini produksi baru") }}</strong>
+        <span>{{ _("Turnkey design, build and commissioning", "Desain, pembuatan & commissioning turnkey") }}</span>
+        {{ icon('arrow', 'i intent-go') }}
+      </a>
+      <a class="intent-card" href="{{ url('solutions.html#special-purpose-machines') }}">
+        {{ icon('robot', 'i intent-ic') }}
+        <strong>{{ _("Automate a manual process", "Otomasi proses manual") }}</strong>
+        <span>{{ _("Special purpose machines & jigs", "Mesin khusus & jig") }}</span>
+        {{ icon('arrow', 'i intent-go') }}
+      </a>
+      <a class="intent-card" href="{{ url('catalogue.html') }}">
+        {{ icon('box', 'i intent-ic') }}
+        <strong>{{ _("A standard machine", "Mesin standar") }}</strong>
+        <span>{{ _("81 machines: mix, fill, pack, inspect", "81 mesin: mixing, filling, packing, inspeksi") }}</span>
+        {{ icon('arrow', 'i intent-go') }}
+      </a>
+      <a class="intent-card" href="{{ url('services.html') }}">
+        {{ icon('wrench', 'i intent-ic') }}
+        <strong>{{ _("Service, retrofit or parts", "Servis, retrofit, atau part") }}</strong>
+        <span>{{ _("Keep existing machines running", "Jaga mesin yang ada tetap berjalan") }}</span>
+        {{ icon('arrow', 'i intent-go') }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" aria-label="{{ _('Clients', 'Klien') }}">
+  <div class="container trust-inner">
+    <p>{{ _("Trusted by leading manufacturers in Indonesia", "Dipercaya produsen terkemuka di Indonesia") }}</p>
+    <ul>{% for c in D.CLIENT_STRIP %}<li>{{ c }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section">
+  <div class="container why">
+    <div class="why-statement reveal">
+      <p class="eyebrow">{{ _("Why Verbindtech", "Mengapa Verbindtech") }}</p>
+      <h2 class="h2">{{ _("Proven global technology — with the response time of a neighbour.", "Teknologi global yang teruji — dengan kecepatan respons seorang tetangga.") }}</h2>
+      <p class="section-sub">{{ _("European OEMs are far away. Pure traders cannot engineer. Small workshops lack process know-how. We sit in between: proven machine technology from our partner network, adapted, built and serviced by our own engineers in Jababeka, Cikarang.", "OEM Eropa berada jauh. Trader murni tidak bisa merekayasa. Bengkel kecil kurang memahami proses. Kami berada di antaranya: teknologi mesin teruji dari jaringan mitra kami, disesuaikan, dibuat, dan dilayani oleh engineer kami sendiri di Jababeka, Cikarang.") }}</p>
+      <a class="btn btn-outline" href="{{ url('about.html') }}">{{ _("About the company", "Tentang perusahaan") }}</a>
+    </div>
+    <ul class="pillars">
+      <li class="pillar reveal">{{ icon('users', 'i pillar-ic') }}<h3>{{ _("One accountable partner", "Satu mitra yang bertanggung jawab") }}</h3><p>{{ _("Requirement, 3D design, build or supply, installation, commissioning and service — under one roof and one contact.", "Kebutuhan, desain 3D, pembuatan atau pengadaan, instalasi, commissioning, dan servis — di bawah satu atap dan satu kontak.") }}</p></li>
+      <li class="pillar reveal">{{ icon('globe', 'i pillar-ic') }}<h3>{{ _("Global technology, local build", "Teknologi global, produksi lokal") }}</h3><p>{{ _("Standard machines from six technology partners; custom machines designed, built and assembled in Indonesia.", "Mesin standar dari enam mitra teknologi; mesin khusus dirancang, dibuat, dan dirakit di Indonesia.") }}</p></li>
+      <li class="pillar reveal">{{ icon('shield', 'i pillar-ic') }}<h3>{{ _("Built for regulated production", "Dibuat untuk produksi teregulasi") }}</h3><p>{{ _("cGMP as the design reference for pharma and food; lean manufacturing as the reference for automotive.", "cGMP sebagai acuan desain untuk farmasi dan pangan; lean manufacturing sebagai acuan untuk otomotif.") }}</p></li>
+      <li class="pillar reveal">{{ icon('clock', 'i pillar-ic') }}<h3>{{ _("Service within reach", "Layanan yang dekat") }}</h3><p>{{ _("Based in Jababeka and serving all of Java, with a 1-year mechanical and electrical warranty on machines we build.", "Berbasis di Jababeka dan melayani seluruh Jawa, dengan garansi mekanis & elektrikal 1 tahun untuk mesin buatan kami.") }}</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section section--tint">
+  <div class="container">
+    {{ m.section_head(_("Industries", "Industri"), _("Engineering shaped by the rules of your sector.", "Rekayasa yang mengikuti aturan sektor Anda."), _("Each industry has its own standards, risks and vocabulary. Start where you work.", "Setiap industri memiliki standar, risiko, dan istilahnya sendiri. Mulailah dari sektor Anda."), 'row') }}
+    <div class="ind-grid">
+      {% for i in D.INDUSTRIES %}
+      <a class="ind-card reveal{% if loop.index <= 2 %} ind-card--lg{% endif %}" href="{{ url('industries/' + i.slug + '.html') }}">
+        {{ img(i.img, '') }}
+        <span class="ind-card-body">
+          {{ icon(i.icon, 'i ind-card-ic') }}
+          <strong>{{ t(i.name) }}</strong>
+          <span>{{ t(i.teaser) }}</span>
+          <span class="link-arrow">{{ _("Explore", "Jelajahi") }}{{ icon('arrow') }}</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS EXPLORER -->
+<section class="section">
+  <div class="container">
+    {{ m.section_head(_("Solutions", "Solusi"), _("From one machine to a complete line — and every year after.", "Dari satu mesin hingga satu lini lengkap — dan setiap tahun sesudahnya."), '', 'row', _("Solutions overview", "Ikhtisar solusi"), url('solutions.html')) }}
+    <div class="explorer" data-tabs>
+      <div class="explorer-tabs" role="tablist" aria-label="{{ _('Solutions', 'Solusi') }}">
+        {% for s in D.SOLUTIONS %}
+        <button type="button" role="tab" id="tab-{{ s.key }}" aria-controls="panel-{{ s.key }}" aria-selected="{{ 'true' if loop.first else 'false' }}" {% if not loop.first %}tabindex="-1"{% endif %}>
+          <span class="explorer-no">0{{ loop.index }}</span>
+          <span><strong>{{ t(s.name) }}</strong><small>{{ t(s.teaser) }}</small></span>
+        </button>
+        {% endfor %}
+      </div>
+      <div class="explorer-panels">
+        {% set panels = {
+          'turnkey': [_("Requirement and process design", "Kebutuhan dan desain proses"), _("3D layout and equipment selection", "Layout 3D dan pemilihan peralatan"), _("Manufacture, installation and piping", "Manufaktur, instalasi, dan perpipaan"), _("Commissioning, referenced to cGMP", "Commissioning, mengacu pada cGMP")],
+          'spm': [_("Inspection and testing stations", "Stasiun inspeksi dan pengujian"), _("Assembly jigs and fixtures", "Jig dan fixture perakitan"), _("Feeders, transfers and quick die change", "Feeder, transfer, dan quick die change"), _("End-of-line automation", "Otomasi akhir lini")],
+          'equipment': [_("Mixing, milling and sieving", "Mixing, milling, dan sieving"), _("Powder and liquid filling", "Filling serbuk dan cair"), _("VFFS, sachet, doypack and tea bag packing", "Pengemasan VFFS, sachet, doypack, dan kantong teh"), _("Metal detection and checkweighing", "Metal detector dan checkweigher")],
+          'fabrication': [_("Stainless and non-stainless fabrication", "Fabrikasi stainless dan non-stainless"), _("GMP tanks and process skids", "Tangki GMP dan skid proses"), _("Precision parts and jigs", "Part presisi dan jig"), _("Spare parts made locally", "Spare part buatan lokal")],
+          'services': [_("Installation and commissioning", "Instalasi dan commissioning"), _("Preventive and predictive maintenance", "Perawatan preventif dan prediktif"), _("Fast-response breakdown support", "Penanganan kerusakan respons cepat"), _("Retrofits of legacy machines", "Retrofit mesin lama")],
+        } %}
+        {% for s in D.SOLUTIONS %}
+        <div class="explorer-panel" role="tabpanel" id="panel-{{ s.key }}" aria-labelledby="tab-{{ s.key }}" {% if not loop.first %}hidden{% endif %}>
+          <div class="explorer-media">{{ img(s.img, t(s.name)) }}</div>
+          <div class="explorer-body">
+            <h3>{{ t(s.name) }}</h3>
+            <p>{{ t(s.teaser) }}</p>
+            <ul class="ticks">{% for item in panels[s.key] %}<li>{{ icon('check') }}{{ item }}</li>{% endfor %}</ul>
+            <a class="btn btn-primary" href="{{ url('services.html') if s.key == 'services' else url('solutions.html#' + s.anchor) }}">{{ _("Learn more", "Selengkapnya") }}{{ icon('arrow') }}</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <div class="container numbers-grid">
+    <div><strong>2008</strong><span>{{ _("Engineering for Indonesian industry since", "Melayani industri Indonesia sejak") }}</span></div>
+    <div><strong>25+</strong><span>{{ _("Pharma, FMCG and automotive manufacturers served", "Produsen farmasi, FMCG, dan otomotif yang dilayani") }}</span></div>
+    <div><strong>81</strong><span>{{ _("Standard machines in our catalogue", "Mesin standar dalam katalog kami") }}</span></div>
+    <div><strong>6</strong><span>{{ _("Global technology & fabrication partners", "Mitra teknologi & fabrikasi global") }}</span></div>
+    <div><strong>1 {{ _("yr", "thn") }}</strong><span>{{ _("Mechanical & electrical warranty on machines we build", "Garansi mekanis & elektrikal untuk mesin buatan kami") }}</span></div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section">
+  <div class="container">
+    {{ m.section_head(_("Projects", "Proyek"), _("Proof, not promises.", "Bukti, bukan janji."), _("A selection of lines and machines we have designed, built and commissioned.", "Sebagian lini dan mesin yang telah kami rancang, buat, dan commissioning."), 'row', _("All projects", "Semua proyek"), url('projects.html')) }}
+    {% set p = D.PROJECT['tea-powder-line'] %}
+    <article class="feature-case reveal">
+      <div class="feature-case-media" data-compare>
+        <div class="seg" role="tablist" aria-label="{{ _('Project view', 'Tampilan proyek') }}">
+          <button type="button" role="tab" aria-selected="true" data-view="design">{{ _("3D design", "Desain 3D") }}</button>
+          <button type="button" role="tab" aria-selected="false" data-view="site">{{ _("Installed", "Terpasang") }}</button>
+          <button type="button" role="tab" aria-selected="false" data-view="fill">{{ _("Filling room", "Ruang filling") }}</button>
+        </div>
+        <div class="compare-stage">
+          <div data-pane="design" class="is-active">{{ img('line-render', _("3D design of the tea powder line", "Desain 3D lini teh bubuk")) }}</div>
+          <div data-pane="site">{{ img('line-cleanroom', _("The installed tea powder line", "Lini teh bubuk yang terpasang")) }}</div>
+          <div data-pane="fill">{{ img('line-fillers', _("Filling machines fed by the line", "Mesin filling yang disuplai lini")) }}</div>
+        </div>
+      </div>
+      <div class="feature-case-body">
+        <p class="case-type">{{ t(p.type) }} · {{ _("Food & herbal", "Pangan & herbal") }}</p>
+        <h3 class="h3">{{ t(p.title) }}</h3>
+        <dl class="case-csr">
+          <div><dt>{{ _("Challenge", "Tantangan") }}</dt><dd>{{ t(p.challenge) }}</dd></div>
+          <div><dt>{{ _("Solution", "Solusi") }}</dt><dd>{{ t(p.solution) }}</dd></div>
+          <div><dt>{{ _("Result", "Hasil") }}</dt><dd>{{ t(p.result) }}</dd></div>
+        </dl>
+        <ol class="mini-flow" aria-label="{{ _('Process flow', 'Alur proses') }}">
+          {% for s in ['Dumping', 'Vibro screen', 'Ribbon mixer', 'Vacuum conveying', 'Magnet trap', 'Metal detector', 'IBC', 'Auger ×3', 'Filling'] %}<li>{{ s }}</li>{% endfor %}
+        </ol>
+      </div>
+    </article>
+    <div class="case-tiles">
+      {{ m.project_tile(D.PROJECT['case-packer']) }}
+      {{ m.project_tile(D.PROJECT['dandori']) }}
+      {{ m.project_tile(D.PROJECT['powerless-conveyor']) }}
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section--navy">
+  <div class="container">
+    {{ m.section_head(_("How we work", "Cara kami bekerja"), _("Six steps. No surprises on delivery day.", "Enam tahap. Tanpa kejutan di hari pengiriman."), _("Every machine follows the same route — and you see it run before it leaves our workshop.", "Setiap mesin melewati alur yang sama — dan Anda melihatnya berjalan sebelum meninggalkan workshop kami."), 'row', _("Discuss your project", "Diskusikan proyek Anda"), url('contact.html#quote')) }}
+    <ol class="steps">
+      {% for title, text, orig in D.STEPS %}
+      <li class="step reveal{% if loop.index == 5 %} step--key{% endif %}">
+        <span class="step-no">{{ '%02d' % loop.index }}</span>
+        <h3>{{ t(title) }}</h3>
+        <p>{{ t(text) }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="steps-note">{{ icon('clock') }}{{ _("Typical custom build: 1–2 months of production after the drawing is approved.", "Pembuatan mesin khusus umumnya 1–2 bulan produksi setelah gambar disetujui.") }}</p>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="section">
+  <div class="container service-split">
+    <div class="reveal">
+      <p class="eyebrow">{{ _("Service & spare parts", "Layanan & spare part") }}</p>
+      <h2 class="h2">{{ _("When a line stops, distance matters.", "Saat lini berhenti, jarak menjadi penting.") }}</h2>
+      <p class="section-sub">{{ _("Our service engineers work from Jababeka, backed by the mechanical and electrical engineers who designed your machine — so problems are isolated and fixed without creating new ones.", "Service engineer kami bekerja dari Jababeka, didukung engineer mekanis dan elektrikal yang merancang mesin Anda — sehingga masalah dapat diisolasi dan diperbaiki tanpa menimbulkan masalah baru.") }}</p>
+      <ul class="ticks ticks--cols">
+        {% for s in D.SERVICES %}<li>{{ icon('check') }}{{ t(s.name) }}</li>{% endfor %}
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn-wa" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}{{ _("Report a breakdown", "Laporkan kerusakan") }}</a>
+        <a class="btn btn-outline" href="{{ url('services.html') }}">{{ _("Service plans", "Paket layanan") }}</a>
+      </div>
+    </div>
+    <figure class="coverage reveal" aria-label="{{ _('Service coverage across Java', 'Cakupan layanan di seluruh Jawa') }}">
+      <figcaption>
+        <strong>{{ _("Service coverage", "Cakupan layanan") }}</strong>
+        <span>{{ _("Jabodetabek · West, Central & East Java · Yogyakarta", "Jabodetabek · Jawa Barat, Tengah & Timur · Yogyakarta") }}</span>
+      </figcaption>
+      <ol class="route">
+        {% for c in D.COVERAGE %}
+        <li{% if c == 'Cikarang' %} class="is-hq"{% endif %}><span>{{ c }}</span>{% if c == 'Cikarang' %}<em>{{ _("Workshop & HQ", "Workshop & kantor pusat") }}</em>{% endif %}</li>
+        {% endfor %}
+      </ol>
+      <p class="coverage-note">{{ _("Clients also served in Sumatra and Kalimantan.", "Klien juga dilayani di Sumatra dan Kalimantan.") }}</p>
+    </figure>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="section section--tint">
+  <div class="container checklist-wrap">
+    <div class="checklist-intro reveal">
+      <p class="eyebrow">{{ _("Buyer’s guide", "Panduan pembeli") }}</p>
+      <h2 class="h2">{{ _("Buying an industrial machine? Check these five things first.", "Akan membeli mesin industri? Periksa lima hal ini dulu.") }}</h2>
+      <p class="section-sub">{{ _("An industrial machine is not a home appliance: when it stops, your deliveries stop. Here is what to ask any supplier — including us.", "Mesin industri bukan peralatan rumah tangga: ketika berhenti, pengiriman Anda ikut berhenti. Inilah yang perlu ditanyakan kepada setiap pemasok — termasuk kami.") }}</p>
+    </div>
+    <ol class="checklist">
+      {% for q, a, ours in D.CHECKLIST %}
+      <li class="reveal">
+        <details{% if loop.first %} open{% endif %}>
+          <summary><span class="check-no">{{ loop.index }}</span>{{ t(q) }}{{ icon('plus', 'i check-ic') }}</summary>
+          <div class="check-body">
+            <p>{{ t(a) }}</p>
+            <p class="check-ours"><strong>Verbindtech:</strong> {{ t(ours) }}</p>
+          </div>
+        </details>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- CATALOGUE -->
+<section class="section">
+  <div class="container">
+    {{ m.section_head(_("Machine catalogue", "Katalog mesin"), _("Standard machines, ready to configure.", "Mesin standar, siap dikonfigurasi."), _("Proven equipment from our technology partners — supplied, integrated into your line and serviced by our team.", "Peralatan teruji dari mitra teknologi kami — dipasok, diintegrasikan ke lini Anda, dan dilayani oleh tim kami."), 'row', _("Browse all 81 machines", "Lihat semua 81 mesin"), url('catalogue.html')) }}
+    <ul class="cat-grid">
+      {% for key, name, desc in D.CATEGORIES %}
+      {% set first = products | selectattr('cat', 'equalto', key) | first %}
+      <li class="reveal">
+        <a class="cat-card" href="{{ url('catalogue.html') }}?cat={{ key }}">
+          <span class="cat-img"><img src="{{ asset('img/products/' + first.id + '.webp') }}" alt="" loading="lazy" decoding="async"></span>
+          <span class="cat-body"><strong>{{ t(name) }}</strong><small>{{ t(desc) }}</small><em>{{ products | selectattr('cat', 'equalto', key) | list | length }} {{ _("machines", "mesin") }}</em></span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- EVENT -->
+<section class="event-strip">
+  <div class="container event-inner">
+    <span class="event-badge">{{ _("Exhibition", "Pameran") }}</span>
+    <p><strong>ALLPACK Indonesia 2026 · Booth D104.</strong> {{ _("See our tray dryer, stick-bag VFFS, premade pouch packer, checkweighers and metal detectors — and talk to our engineers in person.", "Lihat tray dryer, VFFS stick bag, premade pouch packer, checkweigher, dan metal detector kami — dan bicara langsung dengan engineer kami.") }}</p>
+    <a class="link-arrow" href="{{ url('about.html#events') }}">{{ _("Details", "Detail") }}{{ icon('arrow') }}</a>
+  </div>
+</section>
+
+{{ m.cta_band(_("Tell us what you need to make, fill, pack or inspect.", "Ceritakan apa yang perlu Anda produksi, isi, kemas, atau inspeksi."), _("Send your product, target output and available space. Our engineering team will come back to you.", "Kirim informasi produk, target output, dan ruang yang tersedia. Tim engineering kami akan menghubungi Anda.")) }}
+{% endblock %}

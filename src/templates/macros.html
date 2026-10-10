@@ -1,0 +1,71 @@
+{% macro section_head(eyebrow, title, sub='', align='', cta='', cta_href='') %}
+<header class="section-head{% if align %} section-head--{{ align }}{% endif %}">
+  <div>
+    <p class="eyebrow">{{ eyebrow }}</p>
+    <h2 class="h2">{{ title }}</h2>
+    {% if sub %}<p class="section-sub">{{ sub }}</p>{% endif %}
+  </div>
+  {% if cta %}<a class="link-arrow" href="{{ cta_href }}">{{ cta }}{{ icon('arrow') }}</a>{% endif %}
+</header>
+{% endmacro %}
+
+{% macro project_card(p, size='') %}
+<article class="case-card{% if size %} case-card--{{ size }}{% endif %}" data-industries="{{ p.industries | join(' ') }}" id="{{ p.slug }}">
+  <div class="case-media">{{ img(p.img, t(p.title)) }}</div>
+  <div class="case-body">
+    <p class="case-type">{{ t(p.type) }}</p>
+    <h3>{{ t(p.title) }}</h3>
+    <dl class="case-csr">
+      <div><dt>{{ _("Challenge", "Tantangan") }}</dt><dd>{{ t(p.challenge) }}</dd></div>
+      <div><dt>{{ _("Solution", "Solusi") }}</dt><dd>{{ t(p.solution) }}</dd></div>
+      <div><dt>{{ _("Result", "Hasil") }}</dt><dd>{{ t(p.result) }}</dd></div>
+    </dl>
+    <ul class="chips">{% for s in p.scope %}<li>{{ t(s) }}</li>{% endfor %}</ul>
+  </div>
+</article>
+{% endmacro %}
+
+{% macro project_tile(p) %}
+<a class="case-tile" href="{{ url('projects.html#' + p.slug) }}">
+  <span class="case-tile-media">{{ img(p.img, '') }}</span>
+  <span class="case-tile-body">
+    <small>{{ t(p.type) }}</small>
+    <strong>{{ t(p.title) }}</strong>
+    <span class="case-tile-text">{{ t(p.challenge) }}</span>
+    <span class="link-arrow">{{ _("Read the case", "Baca studi kasus") }}{{ icon('arrow') }}</span>
+  </span>
+</a>
+{% endmacro %}
+
+{% macro cta_band(title, text) %}
+<section class="cta-band">
+  <div class="container cta-band-inner">
+    <div class="cta-band-copy">
+      <h2 class="h2">{{ title }}</h2>
+      <p>{{ text }}</p>
+    </div>
+    <div class="cta-band-actions">
+      <a class="btn btn-brand btn-lg" href="{{ url('contact.html#quote') }}">{{ _("Request a quote", "Minta penawaran") }}{{ icon('arrow') }}</a>
+      <a class="btn btn-ghost-light btn-lg" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}{{ _("WhatsApp an engineer", "WhatsApp engineer kami") }}</a>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{% macro page_hero(eyebrow, title, lead, image, crumbs=[]) %}
+<section class="page-hero">
+  <div class="page-hero-media">{{ img(image, '', '', 'eager') }}</div>
+  <div class="container page-hero-inner">
+    {% if crumbs %}
+    <nav class="crumbs" aria-label="{{ _('Breadcrumb', 'Navigasi') }}">
+      <a href="{{ url('index.html') }}">{{ _("Home", "Beranda") }}</a>
+      {% for label, href in crumbs %}<span aria-hidden="true">/</span>{% if href %}<a href="{{ href }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}{% endfor %}
+    </nav>
+    {% endif %}
+    <p class="eyebrow eyebrow--light">{{ eyebrow }}</p>
+    <h1 class="display">{{ title }}</h1>
+    <p class="lead">{{ lead }}</p>
+    {{ caller() if caller }}
+  </div>
+</section>
+{% endmacro %}

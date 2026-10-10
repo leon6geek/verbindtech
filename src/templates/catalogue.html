@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Machine catalogue — mixing, filling, packaging & inspection", "Katalog mesin — mixing, filling, pengemasan & inspeksi") }} | Verbindtech{% endblock %}
+{% block description %}{{ _("81 standard machines for mixing, milling, sieving, conveying, filling, packaging, capping, labeling and inspection — supplied, integrated and serviced by Verbindtech.", "81 mesin standar untuk mixing, milling, sieving, conveying, filling, pengemasan, capping, labeling, dan inspeksi — dipasok, diintegrasikan, dan dilayani oleh Verbindtech.") }}{% endblock %}
+
+{% block main %}
+<section class="contact-hero catalogue-hero">
+  <div class="container">
+    <nav class="crumbs crumbs--dark" aria-label="{{ _('Breadcrumb', 'Navigasi') }}"><a href="{{ url('index.html') }}">{{ _("Home", "Beranda") }}</a><span aria-hidden="true">/</span><a href="{{ url('solutions.html#equipment') }}">{{ _("Solutions", "Solusi") }}</a><span aria-hidden="true">/</span><span aria-current="page">{{ _("Machine catalogue", "Katalog mesin") }}</span></nav>
+    <div class="catalogue-head">
+      <div>
+        <h1 class="display display--sm">{{ _("Machine catalogue", "Katalog mesin") }}</h1>
+        <p class="lead lead--dark">{{ _("Proven standard machines from our technology partners. Every machine is supplied, integrated into your line and serviced by our team in Cikarang.", "Mesin standar teruji dari mitra teknologi kami. Setiap mesin dipasok, diintegrasikan ke lini Anda, dan dilayani oleh tim kami di Cikarang.") }}</p>
+      </div>
+      <ul class="catalogue-promise">
+        <li>{{ icon('check') }}{{ _("Selection by engineers, not salespeople", "Pemilihan oleh engineer, bukan sales") }}</li>
+        <li>{{ icon('check') }}{{ _("Test run with your product", "Uji coba dengan produk Anda") }}</li>
+        <li>{{ icon('check') }}{{ _("Local installation & spare parts", "Instalasi & spare part lokal") }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="container toolbar-inner">
+    <div class="chips-scroll" role="group" aria-label="{{ _('Filter by category', 'Filter berdasarkan kategori') }}" data-chips></div>
+    <label class="search">
+      <span class="sr-only">{{ _("Search machines", "Cari mesin") }}</span>
+      {{ icon('search') }}
+      <input type="search" placeholder="{{ _('Search: auger, labeling, sifter…', 'Cari: auger, labeling, sifter…') }}" data-search>
+    </label>
+  </div>
+</div>
+
+<section class="catalog">
+  <div class="container">
+    <p class="result-line" aria-live="polite" data-count></p>
+    <div class="product-grid" data-grid></div>
+    <div class="empty" data-empty hidden>
+      <p>{{ _("No standard machine matches that search.", "Tidak ada mesin standar yang cocok dengan pencarian tersebut.") }}</p>
+      <a class="btn btn-primary" href="{{ url('solutions.html#special-purpose-machines') }}">{{ _("We can design one for you", "Kami dapat merancangnya untuk Anda") }}{{ icon('arrow') }}</a>
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band(_("Can’t find the right machine?", "Tidak menemukan mesin yang tepat?"), _("Special purpose machines are our core. Send your requirement and we will design around it.", "Mesin khusus adalah keahlian inti kami. Kirimkan kebutuhan Anda dan kami akan merancang sesuai kebutuhan tersebut.")) }}
+
+<dialog class="product-dialog" data-product-dialog aria-labelledby="pd-title">
+  <button class="lb-btn pd-close" type="button" data-pd-close aria-label="{{ _('Close', 'Tutup') }}">{{ icon('close') }}</button>
+  <div class="pd-grid">
+    <div class="pd-img"><img alt="" data-pd-img></div>
+    <div class="pd-body">
+      <span class="product-cat" data-pd-cat></span>
+      <h2 id="pd-title" data-pd-name></h2>
+      <p data-pd-desc></p>
+      <ul class="ticks ticks--sm">
+        <li>{{ icon('check') }}{{ _("Configured to your product, capacity and contact materials", "Dikonfigurasi sesuai produk, kapasitas, dan material kontak Anda") }}</li>
+        <li>{{ icon('check') }}{{ _("Test run before delivery, installation on site", "Uji coba sebelum pengiriman, instalasi di lokasi") }}</li>
+        <li>{{ icon('check') }}{{ _("Spare parts and service from Cikarang", "Spare part dan layanan dari Cikarang") }}</li>
+      </ul>
+      <div class="pd-actions">
+        <a class="btn btn-brand" target="_blank" rel="noopener" data-pd-wa>{{ icon('whatsapp') }}{{ _("Ask for specs & price", "Minta spesifikasi & harga") }}</a>
+        <a class="btn btn-outline" data-pd-mail>{{ icon('mail') }}{{ _("Email", "Email") }}</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.VT_CATALOG = {
+  items: {{ products | tojson }},
+  categories: {{ D.CATEGORIES | map('first') | list | tojson }},
+  labels: {
+    all: {{ _("All", "Semua") | tojson }},
+    cats: { {% for key, name, desc in D.CATEGORIES %}{{ key | tojson }}: {{ t(name) | string | tojson }}{% if not loop.last %}, {% endif %}{% endfor %} },
+    machine: {{ _("machine", "mesin") | string | tojson }},
+    machines: {{ _("machines", "mesin") | string | tojson }},
+    enquiry: {{ _("Hello Verbindtech, I am interested in the %s. Could you send me the specifications and a quotation?", "Halo Verbindtech, saya tertarik dengan %s. Mohon kirimkan spesifikasi dan penawarannya.") | string | tojson }},
+    subject: {{ _("Enquiry", "Permintaan") | string | tojson }}
+  },
+  imgBase: {{ asset('img/products/') | tojson }}
+};
+</script>
+<script src="{{ asset('js/catalog.js') }}" defer></script>
+{% endblock %}

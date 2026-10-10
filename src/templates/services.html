@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block title %}{{ _("Service, maintenance, retrofit & spare parts", "Layanan, perawatan, retrofit & spare part") }} | Verbindtech{% endblock %}
+{% block description %}{{ _("Installation, commissioning, preventive and corrective maintenance, retrofits and spare parts for process and packaging machines across Java.", "Instalasi, commissioning, perawatan preventif dan korektif, retrofit, dan spare part untuk mesin proses dan pengemasan di seluruh Jawa.") }}{% endblock %}
+
+{% block main %}
+{% call m.page_hero(_("Services", "Layanan"), _("Keep your line running — for the whole life of the machine.", "Jaga lini Anda tetap berjalan — sepanjang umur mesin."), _("After-sales is not an afterthought for us. The engineers who design our machines also stand behind them, from installation to the retrofit years later.", "Bagi kami purna jual bukan sekadar formalitas. Engineer yang merancang mesin kami juga mendukungnya, dari instalasi hingga retrofit bertahun-tahun kemudian."), 'checkweigher-site', [(_("Services", "Layanan"), '')]) %}
+<div class="hero-actions">
+  <a class="btn btn-wa btn-lg" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}{{ _("Report a breakdown", "Laporkan kerusakan") }}</a>
+  <a class="btn btn-ghost-light btn-lg" href="{{ url('contact.html#quote') }}">{{ _("Plan maintenance or a retrofit", "Rencanakan perawatan atau retrofit") }}</a>
+</div>
+{% endcall %}
+
+<section class="section">
+  <div class="container">
+    <div class="quick-actions">
+      <a class="qa-card qa-card--urgent reveal" href="https://wa.me/{{ D.COMPANY.wa }}" target="_blank" rel="noopener">
+        {{ icon('bolt', 'i qa-ic') }}
+        <strong>{{ _("Machine down now", "Mesin berhenti sekarang") }}</strong>
+        <span>{{ _("Send a photo or video on WhatsApp. Our service team responds and dispatches from Cikarang.", "Kirim foto atau video via WhatsApp. Tim layanan kami merespons dan berangkat dari Cikarang.") }}</span>
+        <em>{{ D.COMPANY.wa_display }}</em>
+      </a>
+      <a class="qa-card reveal" href="{{ url('contact.html') }}?need=service#quote">
+        {{ icon('calendar', 'i qa-ic') }}
+        <strong>{{ _("Plan maintenance", "Rencanakan perawatan") }}</strong>
+        <span>{{ _("Preventive or predictive schedules based on TPM practice.", "Jadwal perawatan preventif atau prediktif berbasis praktik TPM.") }}</span>
+        <em>{{ _("Request a plan", "Minta rencana") }} →</em>
+      </a>
+      <a class="qa-card reveal" href="{{ url('contact.html') }}?need=retrofit#quote">
+        {{ icon('refresh', 'i qa-ic') }}
+        <strong>{{ _("Upgrade an old machine", "Upgrade mesin lama") }}</strong>
+        <span>{{ _("Retrofit controls, drives and mechanics to extend machine life.", "Retrofit kontrol, penggerak, dan mekanik untuk memperpanjang umur mesin.") }}</span>
+        <em>{{ _("Request an assessment", "Minta asesmen") }} →</em>
+      </a>
+      <a class="qa-card reveal" href="{{ url('contact.html') }}?need=parts#quote">
+        {{ icon('parts', 'i qa-ic') }}
+        <strong>{{ _("Order spare parts", "Pesan spare part") }}</strong>
+        <span>{{ _("Partner parts, or parts machined and fabricated in our workshop.", "Part dari mitra, atau part hasil machining dan fabrikasi di workshop kami.") }}</span>
+        <em>{{ _("Send part details", "Kirim detail part") }} →</em>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    {{ m.section_head(_("What we do", "Yang kami kerjakan"), _("Six services across the machine lifecycle.", "Enam layanan sepanjang siklus hidup mesin.")) }}
+    <ul class="service-grid">
+      {% for s in D.SERVICES %}
+      <li class="service-card reveal" id="{{ s.anchor }}">
+        {{ icon(s.icon, 'i service-ic') }}
+        <h3>{{ t(s.name) }}</h3>
+        <p>{{ t(s.desc) }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container lifecycle-wrap">
+    <div class="reveal">
+      <p class="eyebrow">{{ _("Lifecycle", "Siklus hidup") }}</p>
+      <h2 class="h2">{{ _("One partner from first sketch to the next upgrade.", "Satu mitra dari sketsa pertama hingga upgrade berikutnya.") }}</h2>
+      <p class="section-sub">{{ _("Because we design, build and service, nothing gets lost between suppliers. The drawing your machine was built from is the drawing our service team works from.", "Karena kami merancang, membuat, dan melayani, tidak ada yang hilang di antara pemasok. Gambar yang menjadi dasar pembuatan mesin Anda adalah gambar yang sama yang digunakan tim layanan kami.") }}</p>
+    </div>
+    <ol class="lifecycle reveal" aria-label="{{ _('Machine lifecycle', 'Siklus hidup mesin') }}">
+      <li>{{ icon('doc') }}<strong>{{ _("Consult & design", "Konsultasi & desain") }}</strong></li>
+      <li>{{ icon('factory') }}<strong>{{ _("Build or source", "Produksi atau pengadaan") }}</strong></li>
+      <li>{{ icon('install') }}<strong>{{ _("Install & commission", "Instalasi & commissioning") }}</strong></li>
+      <li>{{ icon('calendar') }}<strong>{{ _("Maintain", "Perawatan") }}</strong></li>
+      <li>{{ icon('bolt') }}<strong>{{ _("Repair", "Perbaikan") }}</strong></li>
+      <li>{{ icon('refresh') }}<strong>{{ _("Retrofit & upgrade", "Retrofit & upgrade") }}</strong></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="container commit-grid">
+    <div class="reveal">
+      <p class="eyebrow eyebrow--light">{{ _("Our commitment", "Komitmen kami") }}</p>
+      <h2 class="h2">{{ _("What you can hold us to.", "Yang dapat Anda pegang dari kami.") }}</h2>
+    </div>
+    <ul class="commit-list">
+      <li class="reveal"><strong>{{ _("1-year warranty", "Garansi 1 tahun") }}</strong><span>{{ _("On mechanical and electrical parts of every machine we build.", "Untuk bagian mekanis dan elektrikal setiap mesin buatan kami.") }}</span></li>
+      <li class="reveal"><strong>{{ _("Engineers behind the technicians", "Engineer di belakang teknisi") }}</strong><span>{{ _("Service engineers visit with the backing of our mechanical and electrical design engineers.", "Service engineer berkunjung dengan dukungan engineer desain mekanis dan elektrikal kami.") }}</span></li>
+      <li class="reveal"><strong>{{ _("Hands-on support team", "Tim pendukung lapangan") }}</strong><span>{{ _("Mechanics and welders back up every after-sales job.", "Mekanik dan welder mendukung setiap pekerjaan purna jual.") }}</span></li>
+      <li class="reveal"><strong>{{ _("Up to 3 after-sales visits", "Hingga 3 kunjungan purna jual") }}</strong><span>{{ _("Included for certain machines.", "Termasuk untuk mesin tertentu.") }}</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container service-split">
+    <div class="reveal">
+      <p class="eyebrow">{{ _("Retrofit", "Retrofit") }}</p>
+      <h2 class="h2">{{ _("Imported machines, supported locally.", "Mesin impor, didukung secara lokal.") }}</h2>
+      <p class="section-sub">{{ _("Since 2012 our group has modified and retrofitted pharma and food machines from brands such as Manesty, Bausch+Ströbel, Glatt and Diosna — keeping proven equipment productive when the original maker is far away.", "Sejak 2012 grup kami telah memodifikasi dan melakukan retrofit mesin farmasi dan pangan dari merek seperti Manesty, Bausch+Ströbel, Glatt, dan Diosna — menjaga peralatan teruji tetap produktif ketika pabrikan aslinya berada jauh.") }}</p>
+      <a class="btn btn-outline" href="{{ url('contact.html') }}?need=retrofit#quote">{{ _("Request a retrofit assessment", "Minta asesmen retrofit") }}</a>
+    </div>
+    <figure class="coverage reveal" aria-label="{{ _('Service coverage across Java', 'Cakupan layanan di seluruh Jawa') }}">
+      <figcaption>
+        <strong>{{ _("Service coverage", "Cakupan layanan") }}</strong>
+        <span>{{ _("Jabodetabek · West, Central & East Java · Yogyakarta", "Jabodetabek · Jawa Barat, Tengah & Timur · Yogyakarta") }}</span>
+      </figcaption>
+      <ol class="route">
+        {% for c in D.COVERAGE %}
+        <li{% if c == 'Cikarang' %} class="is-hq"{% endif %}><span>{{ c }}</span>{% if c == 'Cikarang' %}<em>{{ _("Workshop & HQ", "Workshop & kantor pusat") }}</em>{% endif %}</li>
+        {% endfor %}
+      </ol>
+      <p class="coverage-note">{{ _("Clients also served in Sumatra and Kalimantan.", "Klien juga dilayani di Sumatra dan Kalimantan.") }}</p>
+    </figure>
+  </div>
+</section>
+
+{{ m.cta_band(_("Tell us which machine and what is happening.", "Beri tahu kami mesin apa dan apa yang terjadi."), _("Model, symptoms and a short video are usually enough for our engineers to prepare the right parts and people.", "Model, gejala, dan video singkat biasanya cukup bagi engineer kami untuk menyiapkan part dan personel yang tepat.")) }}
+{% endblock %}
