@@ -59,4 +59,14 @@ python3 -m http.server 8000
 
 ## 部署
 
-上传全部文件（`src/` 和 `docs/` 可以不传）到任意静态主机即可。询价表单不需要后台：提交后会打开 WhatsApp 或邮件，并自动填好结构化的询价内容。
+网站目前通过 GitHub Pages 发布：https://leon6geek.github.io/verbindtech/
+
+- 发布来源：仓库 Settings → Pages → Deploy from a branch → `claude/nice-maxwell-xj0eh3` / `(root)`。
+- 每次推送到这个分支后，GitHub 会在 1–2 分钟内自动更新网站。
+- 根目录的 `.nojekyll` 文件让 GitHub 原样发布这些文件，请不要删除。
+
+**换成公司域名（verbind-tech.net）时：**
+1. 把 `src/data.py` 里的 `SITE_URL` 改成 `https://verbind-tech.net/`，然后运行 `python3 src/build.py`，再提交。
+2. 在 Settings → Pages → Custom domain 里填入域名，并按 GitHub 的提示在域名服务商处添加 DNS 记录。
+
+也可以把全部文件（`src/` 和 `docs/` 可以不传）上传到任意静态主机。询价表单不需要后台：提交后会打开 WhatsApp 或邮件，并自动填好结构化的询价内容。

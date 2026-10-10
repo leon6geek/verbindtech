@@ -5,6 +5,10 @@ def L(en, id_):
     return {"en": en, "id": id_}
 
 
+# Public address of the site. Used for canonical links and link previews (WhatsApp, LinkedIn…).
+# Change to "https://verbind-tech.net/" once the site moves to the company domain.
+SITE_URL = "https://leon6geek.github.io/verbindtech/"
+
 COMPANY = {
     "name": "Verbindtech Machinery",
     "wa": "6281932237600",
